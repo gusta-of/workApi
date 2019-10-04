@@ -9,7 +9,7 @@ using workApi.Model;
 
 namespace workApi.Repository
 {
-    public class PessoaRepository : IPessoaRepository
+    public class PessoaRepository : IGenericsRepository<Pessoa>
     {
         private readonly string _connectionString;
 
@@ -23,6 +23,16 @@ namespace workApi.Repository
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
                 return connection.Query<Pessoa>("SELECT * FROM Pessoa ORDER BY nome ASC");
+            }
+        }
+
+        public Pessoa GetId(long id)
+        {
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                return connection.Query<Pessoa>($"SELECT * FROM Pessoa WHERE id = {id}")
+                    .Cast<Pessoa>()
+                    .FirstOrDefault();
             }
         }
     }

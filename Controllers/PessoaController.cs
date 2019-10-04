@@ -31,5 +31,18 @@ namespace workApi.Controllers
             return Ok(pessoas);
         }
 
+        [HttpGet("{id}")]
+        [Produces(typeof(Pessoa))]
+        public IActionResult GetTodoItem(long id)
+        {
+            var pessoa = _pessoaRepository.GetId(id);
+
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pessoa);
+        }
     }
 }
