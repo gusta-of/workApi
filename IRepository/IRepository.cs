@@ -6,9 +6,7 @@ using workApi.Model;
 
 namespace workApi.IRepository
 {
-    interface IGenericsRepository<T>
+    interface IRepository
     {
-        IEnumerable<T> GetAll();
-        T GetId(long id);
     }
 }

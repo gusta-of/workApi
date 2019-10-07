@@ -9,16 +9,14 @@ using workApi.Model;
 
 namespace workApi.Repository
 {
-    public class PessoaRepository : IGenericsRepository<Pessoa>
+    public class PessoaRepository : RepositoryAbstrato<Pessoa>
     {
-        private readonly string _connectionString;
-
-        public PessoaRepository(string connectionString)
+        public PessoaRepository(string connectionString) 
+            : base(connectionString)
         {
-            _connectionString = connectionString;
         }
 
-        public IEnumerable<Pessoa> GetAll()
+        public override IEnumerable<Pessoa> GetAll()
         {
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
@@ -26,7 +24,7 @@ namespace workApi.Repository
             }
         }
 
-        public Pessoa GetId(long id)
+        public override Pessoa GetId(long id)
         {
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
