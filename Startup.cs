@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using workApi.IRepository;
+using workApi.Model;
 using workApi.Repository;
 
 namespace workApi
@@ -29,7 +30,7 @@ namespace workApi
         {
             services.AddControllers();
 
-            services.AddScoped<PessoaRepository>(factory =>
+            services.AddScoped(typeof(PessoaRepository), factory =>
             {
                 var stringConnection = Configuration.GetConnectionString("MySqlDbConnection");
                 return new PessoaRepository(stringConnection);
