@@ -29,12 +29,10 @@ namespace workApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            var stringConnection = Configuration.GetConnectionString("MySqlDbConnection");
 
-            services.AddScoped(typeof(PessoaRepository), factory =>
-            {
-                var stringConnection = Configuration.GetConnectionString("MySqlDbConnection");
-                return new PessoaRepository(stringConnection);
-            });
+            services.AddScoped(typeof(PessoaRepository), factory => { return new PessoaRepository(stringConnection); })
+                    .AddScoped(typeof(Object), factory => { return new Object(); } );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
