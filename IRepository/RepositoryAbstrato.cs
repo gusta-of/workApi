@@ -10,7 +10,7 @@ namespace workApi.IRepository
 {
     public abstract class RepositoryAbstrato<T> : IRepository
     {
-        public string _connectionString;
+        protected string _connectionString;
         public RepositoryAbstrato(string connectionString)
         {
             _connectionString = connectionString;
