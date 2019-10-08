@@ -32,7 +32,7 @@ namespace workApi
             var stringConnection = Configuration.GetConnectionString("MySqlDbConnection");
 
             services.AddScoped(typeof(PessoaRepository), factory => { return new PessoaRepository(stringConnection); })
-                    .AddScoped(typeof(Object), factory => { return new Object(); } );
+                    .AddScoped(typeof(OperadorRepository), factory => { return new OperadorRepository(stringConnection); });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
