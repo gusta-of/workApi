@@ -7,21 +7,28 @@ namespace workApi.IRepository.ContextWebConnection
 {
     public class WebContext
     {
-        private static WebContext _instance = null;
+        public static WebContext _instance = null;
         public DbWebContext Sessoes { get; }
-        public static WebContext Current 
+
+        private WebContext()
         {
-            get 
+            if (Sessoes == null)
+                Sessoes = new DbWebContext();
+        }
+
+        public static WebContext Current
+        {
+            get
             {
-                lock(new object())
+                lock (new object())
                 {
                     _instance = new WebContext();
                 }
 
                 return _instance;
-            }       
+            }
         }
 
-        
+
     }
 }

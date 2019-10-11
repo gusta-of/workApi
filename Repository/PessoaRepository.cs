@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using workApi.IRepository;
+using workApi.IRepository.ContextWebConnection;
 using workApi.Model;
 
 namespace workApi.Repository
@@ -18,6 +19,8 @@ namespace workApi.Repository
 
         public override IEnumerable<Pessoa> GetAll()
         {
+            var teste = DbHelper.Instancia.RetornaTeste();
+
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
                 return connection.Query<Pessoa>("SELECT * FROM Pessoa ORDER BY nome ASC");

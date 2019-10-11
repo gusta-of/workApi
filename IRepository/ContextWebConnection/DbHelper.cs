@@ -20,7 +20,8 @@ namespace workApi.IRepository.ContextWebConnection
                     {
                         lock(new object())
                         {
-                            WebContext.Current.Sessoes["SESSAO_INSTANCIA"] = new DbHelper();
+                            _instancia = new DbHelper();
+                            WebContext.Current.Sessoes["SESSAO_INSTANCIA"] = _instancia;
                         }
 
                         return (DbHelper)WebContext.Current.Sessoes["SESSAO_INSTANCIA"];
@@ -34,6 +35,11 @@ namespace workApi.IRepository.ContextWebConnection
 
                 return _instancia;
             }
+        }
+
+        public string RetornaTeste()
+        {
+            return "Fincionou";
         }
     }
 }

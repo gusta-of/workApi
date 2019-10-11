@@ -6,34 +6,28 @@ using System.Threading.Tasks;
 
 namespace workApi.IRepository.ContextWebConnection
 {
-    public class DbWebContext : ICollection
+    public class DbWebContext
     {
-        public object this[string name]
-        {
-            get { return Sessoes[name]; }
-            set { Sessoes.Add(name, value); }
-        }
-
-        private static Dictionary<string, object> Sessoes
+        public object? this[string name]
         {
             get
             {
-                if (Sessoes == null) return new Dictionary<string, object>();
-                return Sessoes;
+                if (Sessoes == null)
+                {
+                    Sessoes = new Dictionary<string, object>();
+                }
+
+                if(Sessoes.ContainsKey(name))
+                    return Sessoes[name];
+
+                return null;
             }
+            set { Sessoes.Add(name, value); }
         }
+
+        private static Dictionary<string, object> Sessoes = null;
 
         public int Count => Sessoes.Any() ? Sessoes.Count() : 0;
-
-        public bool IsSynchronized => false;
-
-        public object SyncRoot => true;
-
-        public void CopyTo(Array array, int index) { return; }
-
-        public IEnumerator GetEnumerator()
-        {
-            return Sessoes.GetEnumerator();
-        }
+        public IEnumerator GetEnumerator() => Sessoes.GetEnumerator();
     }
 }
