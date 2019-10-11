@@ -8,7 +8,7 @@ namespace workApi.IRepository.ContextWebConnection
 {
     public class DbWebContext
     {
-        public object? this[string name]
+        public object this[string name]
         {
             get
             {
