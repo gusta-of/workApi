@@ -17,9 +17,21 @@ namespace workApi.IRepository.ContextWebConnection
             {
                if(ManipuladorDeContexto.Current != null)
                 {
+                    if(ManipuladorDeContexto.Current.Sessoes == null)
+                    {
+                        ManipuladorDeContexto.Current.CrieArmazenDeContexto();
+                    }
 
+                   if(ManipuladorDeContexto.Current.Sessoes["SESSAO_CONEXAO"] == null) {
+                        if(_instancia == null)
+                        {
+                            _instancia = new DbHelper();
+                            ManipuladorDeContexto.Current.Sessoes["SESSAO_CONEXAO"] = _instancia;
+                        }
+                   }
                 }
-                return null;
+
+                return (DbHelper)ManipuladorDeContexto.Current.Sessoes["SESSAO_CONEXAO"];
             }
         }
 
