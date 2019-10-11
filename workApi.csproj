@@ -25,4 +25,10 @@
     <Folder Include="ExtensionMethods\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="BibliotecaDeClasses">
+      <HintPath>..\..\..\BBC\BibliotecaDeClasses.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
