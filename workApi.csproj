@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Reference Include="BibliotecaDeClasses">
-      <HintPath>..\..\..\BBC\BibliotecaDeClasses.dll</HintPath>
+      <HintPath>..\..\..\..\BBC\BibliotecaDeClasses.dll</HintPath>
     </Reference>
   </ItemGroup>
 
