@@ -19,7 +19,7 @@ namespace workApi.Repository
 
         public override IEnumerable<Pessoa> GetAll()
         {
-            var teste = DbHelper.Instancia.RetornaTeste();
+            //var teste = DbHelper.Instancia.RetornaTeste();
 
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {

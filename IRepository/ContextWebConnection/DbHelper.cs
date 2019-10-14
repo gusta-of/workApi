@@ -8,7 +8,16 @@ namespace workApi.IRepository.ContextWebConnection
 {
     public class DbHelper
     {
-        private DbHelper() { }
+        private DbHelper() 
+        {
+            CrieConexaoUnica();
+        }
+
+        private void CrieConexaoUnica()
+        {
+            throw new NotImplementedException();
+        }
+
         private static DbHelper _instancia = null;
 
         public static DbHelper Instancia 
