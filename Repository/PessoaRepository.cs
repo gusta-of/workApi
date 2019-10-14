@@ -19,9 +19,7 @@ namespace workApi.Repository
 
         public override IEnumerable<Pessoa> GetAll()
         {
-            //var teste = DbHelper.Instancia.RetornaTeste();
-
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (MySqlConnection connection = DbHelper.Instancia.Connection(_connectionString))
             {
                 return connection.Query<Pessoa>("SELECT * FROM Pessoa ORDER BY nome ASC");
             }

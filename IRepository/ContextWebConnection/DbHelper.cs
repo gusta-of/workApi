@@ -1,4 +1,5 @@
 ﻿using BibliotecaDeClasses.ConnectionContext;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,20 @@ namespace workApi.IRepository.ContextWebConnection
     {
         private DbHelper() 
         {
-            CrieConexaoUnica();
         }
 
-        private void CrieConexaoUnica()
+        public MySqlConnection Connection(string connectionString)
         {
-            throw new NotImplementedException();
+            if(_connexa == null)
+            {
+                _connexa = new MySqlConnection(connectionString);
+            }
+
+            return _connexa;
         }
 
         private static DbHelper _instancia = null;
+        private MySqlConnection _connexa = null;
 
         public static DbHelper Instancia 
         {
