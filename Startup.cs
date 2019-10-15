@@ -22,17 +22,28 @@ namespace workApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //services.AddDbContext<AppContext>(options =>
+            //    options.UseSqlServer(Configuration["ConnectionStrings:MySqlDbConnection"])
+            //);
+
             services.AddCors();
             services.AddControllers();
 
             // objetos de configurações fortemente tipados
             var appSettingsSection = Configuration.GetSection("AppSettings");
-            var stringConnection = Configuration.GetConnectionString("MySqlDbConnection");
+            var stringConnection = Configuration.GetSection("ConnectionStrings");
 
             services.Configure<AppSettings>(appSettingsSection);
+            services.Configure<AppDbContext>(stringConnection);
+
+            // configura contexto de conexão com o banco 
+            stringConnection.Get<AppDbContext>();
 
             // configura autenticação JWT
             var appSettings = appSettingsSection.Get<AppSettings>();
+            
+
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
             {
@@ -54,7 +65,7 @@ namespace workApi
 
             // configura DI para serviços da aplicação
             services.AddScoped<IOperadorService, OperadorService>();
-            services.AddScoped<IPessoaService, PessoaService>(fac => new PessoaService(stringConnection));
+            services.AddScoped<IPessoaService, PessoaService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
