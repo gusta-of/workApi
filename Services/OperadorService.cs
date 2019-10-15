@@ -16,7 +16,7 @@ namespace workApi.Services
     public class OperadorService : IOperadorService
     {
         private readonly AppSettings _appSettings;
-        private readonly AppDbContext _appContextConnection;
+        private readonly AppDbContext _appDbContext;
 
         /* Lista apenas para teste */
         private List<Operador> _operadores = new List<Operador>()
@@ -27,10 +27,10 @@ namespace workApi.Services
         };
 
         public OperadorService(IOptions<AppSettings> appSettings,
-            IOptions<AppDbContext> appContextConnection)
+            IOptions<AppDbContext> appDbContext)
         {
             _appSettings = appSettings.Value;
-            _appContextConnection = appContextConnection.Value;
+            _appDbContext = appDbContext.Value;
         }
 
         public Operador Autentique(string username, string senha)

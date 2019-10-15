@@ -10,21 +10,21 @@ namespace workApi.Services
 {
     public class PessoaService : IPessoaService
     {
-        private readonly AppDbContext _appContextConnection;
-        public PessoaService(IOptions<AppDbContext> stringContextConnection)
+        private readonly AppDbContext _appDbContext;
+        public PessoaService(IOptions<AppDbContext> appDbContext)
         {
-            _appContextConnection = stringContextConnection.Value;
+            _appDbContext = appDbContext.Value;
         }
 
         public IEnumerable<Pessoa> GetAll()
         {
-            var connexao = DbHelper.Instancia.GetConnection(_appContextConnection.MySqlDbConnection);
+            var connexao = DbHelper.Instancia.GetConnection(_appDbContext.MySqlDbConnection);
             return connexao.Query<Pessoa>("SELECT * FROM Pessoa ORDER BY nome");
         }
 
         public Pessoa GetId(long id)
         {
-            var connexao = DbHelper.Instancia.GetConnection(_appContextConnection.MySqlDbConnection);
+            var connexao = DbHelper.Instancia.GetConnection(_appDbContext.MySqlDbConnection);
             return connexao.Query<Pessoa>($"SELECT * FROM Pessoa WHERE id = {id}").FirstOrDefault();
         }
     }

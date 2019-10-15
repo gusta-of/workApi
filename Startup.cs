@@ -22,11 +22,6 @@ namespace workApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            //services.AddDbContext<AppContext>(options =>
-            //    options.UseSqlServer(Configuration["ConnectionStrings:MySqlDbConnection"])
-            //);
-
             services.AddCors();
             services.AddControllers();
 
