@@ -3,43 +3,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using workApi.Interfaces.ISercive;
 using workApi.Model;
 using workApi.Repository;
 namespace workApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("[controller]")]
     public class OperadorController : ControllerBase
     {
-        private readonly OperadorRepository _operadorRepository;
-        public OperadorController(OperadorRepository operadorRepository)
+        private readonly IOperadorService _operadorService;
+        
+        public OperadorController(IOperadorService operadorService)
         {
-            _operadorRepository = operadorRepository;
+            _operadorService = operadorService;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("autenticacao")]
+        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        {
+            var user = _operadorService.Autentique(model.Username, model.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Usuário e Senha Incorreto!" });
+
+            return Ok(user);
         }
 
         [HttpGet]
-        [Produces(typeof(Operador))]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            var operadores = _operadorRepository.GetAll();
-            if (operadores.Count() == 0)
-                return NoContent();
-            return Ok(operadores);
-        }
-
-        [HttpGet("{id}")]
-        [Produces(typeof(Operador))]
-        public IActionResult GetTodoItem(long id)
-        {
-            var operador = _operadorRepository.GetId(id);
-
-            if (operador == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(operador);
+            var users = _operadorService.GetAll();
+            return Ok(users);
         }
     }
 }
