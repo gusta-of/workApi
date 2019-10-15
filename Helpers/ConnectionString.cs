@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using workApi.Model;
 
-namespace workApi.IRepository
+namespace workApi.Helpers
 {
-    interface IRepository
+    public class ConnectionString
     {
+        public string StringDeConexao { get; set; }
     }
 }

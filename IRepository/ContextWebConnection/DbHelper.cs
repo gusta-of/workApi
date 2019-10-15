@@ -13,7 +13,7 @@ namespace workApi.IRepository.ContextWebConnection
         {
         }
 
-        public MySqlConnection Connection(string connectionString)
+        public MySqlConnection GetConnection(string connectionString)
         {
             if(_connexa == null)
             {

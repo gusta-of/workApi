@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using workApi.IRepository;
+using workApi.Interfaces.ISercive;
 using workApi.Model;
-using workApi.Repository;
 
 namespace workApi.Controllers
 {
@@ -14,18 +9,18 @@ namespace workApi.Controllers
     [ApiController]
     public class PessoaController : ControllerBase
     {
-        private readonly PessoaRepository _pessoaRepository;
+        private readonly IPessoaService _pessoaService;
 
-        public PessoaController(PessoaRepository pessoaRepository)
+        public PessoaController(IPessoaService pessoaService)
         {
-            _pessoaRepository = pessoaRepository;
+            _pessoaService = pessoaService;
         }
 
         [HttpGet]
         [Produces(typeof(Pessoa))]
         public IActionResult Get()
         {
-            var pessoas = _pessoaRepository.GetAll();
+            var pessoas = _pessoaService.GetAll();
             if (pessoas.Count() == 0)
                 return NoContent();
             return Ok(pessoas);
@@ -35,7 +30,7 @@ namespace workApi.Controllers
         [Produces(typeof(Pessoa))]
         public IActionResult GetTodoItem(long id)
         {
-            var pessoa = _pessoaRepository.GetId(id);
+            var pessoa = _pessoaService.GetId(id);
 
             if (pessoa == null)
             {

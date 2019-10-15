@@ -1,24 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
 using workApi.Helpers;
 using workApi.Interfaces.ISercive;
-using workApi.IRepository;
-using workApi.Model;
-using workApi.Repository;
 using workApi.Services;
 
 namespace workApi
@@ -39,6 +27,8 @@ namespace workApi
 
             // objetos de configurações fortemente tipados
             var appSettingsSection = Configuration.GetSection("AppSettings");
+            var stringConnection = Configuration.GetConnectionString("MySqlDbConnection");
+
             services.Configure<AppSettings>(appSettingsSection);
 
             // configura autenticação JWT
@@ -64,6 +54,7 @@ namespace workApi
 
             // configura DI para serviços da aplicação
             services.AddScoped<IOperadorService, OperadorService>();
+            services.AddScoped<IPessoaService, PessoaService>(fac => new PessoaService(stringConnection));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
