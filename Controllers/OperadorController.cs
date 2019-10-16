@@ -7,7 +7,7 @@ namespace workApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class OperadorController : ControllerBase
     {
         private readonly IOperadorService _operadorService;
@@ -30,6 +30,7 @@ namespace workApi.Controllers
         }
 
         [HttpGet]
+        [Produces(typeof(Pessoa))]
         public IActionResult GetAll()
         {
             var users = _operadorService.GetAll();
