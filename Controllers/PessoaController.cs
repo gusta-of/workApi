@@ -1,12 +1,10 @@
 ﻿using System.Linq;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using workApi.Interfaces.ISercive;
 using workApi.Model;
 
 namespace workApi.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PessoaController : ControllerBase
