@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using workApi.Interfaces.ISercive;
 using workApi.Model;
+using workApi.Services;
 
 namespace workApi.Controllers
 {
@@ -11,9 +11,9 @@ namespace workApi.Controllers
     [ApiController]
     public class PessoaController : ControllerBase
     {
-        private readonly IPessoaService _pessoaService;
+        private readonly PessoaService _pessoaService;
 
-        public PessoaController(IPessoaService pessoaService)
+        public PessoaController(PessoaService pessoaService)
         {
             _pessoaService = pessoaService;
         }

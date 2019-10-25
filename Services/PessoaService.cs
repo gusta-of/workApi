@@ -8,7 +8,7 @@ using workApi.Model;
 
 namespace workApi.Services
 {
-    public class PessoaService : IPessoaService
+    public class PessoaService : IService<Pessoa>
     {
         private readonly AppDbContext _appDbContext;
         public PessoaService(IOptions<AppDbContext> appDbContext)

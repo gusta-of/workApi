@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using workApi.Helpers;
-using workApi.Interfaces.ISercive;
 using workApi.Services;
 
 namespace workApi
@@ -37,7 +36,7 @@ namespace workApi
 
             // configura autenticação JWT
             var appSettings = appSettingsSection.Get<AppSettings>();
-            
+
 
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
@@ -59,8 +58,8 @@ namespace workApi
             });
 
             // configura DI para serviços da aplicação
-            services.AddScoped<IOperadorService, OperadorService>();
-            services.AddScoped<IPessoaService, PessoaService>();
+            services.AddScoped<OperadorService>();
+            services.AddScoped<PessoaService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -76,7 +75,8 @@ namespace workApi
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllers();
             });
         }

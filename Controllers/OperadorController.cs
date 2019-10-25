@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using workApi.Interfaces.ISercive;
 using workApi.Model;
+using workApi.Services;
 
 namespace workApi.Controllers
 {
@@ -10,9 +10,9 @@ namespace workApi.Controllers
     [Route("api/[controller]")]
     public class OperadorController : ControllerBase
     {
-        private readonly IOperadorService _operadorService;
+        private readonly OperadorService _operadorService;
         
-        public OperadorController(IOperadorService operadorService)
+        public OperadorController(OperadorService operadorService)
         {
             _operadorService = operadorService;
         }
