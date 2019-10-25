@@ -13,7 +13,7 @@ using workApi.Model;
 
 namespace workApi.Services
 {
-    public class OperadorService : IOperadorService
+    public class OperadorService : IService<Operador>
     {
         private readonly AppSettings _appSettings;
         private readonly AppDbContext _appDbContext;
@@ -59,6 +59,11 @@ namespace workApi.Services
         public IEnumerable<Operador> GetAll()
         {
             return _operadores.ClearAllPassword();
+        }
+
+        public Operador GetId(long id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
